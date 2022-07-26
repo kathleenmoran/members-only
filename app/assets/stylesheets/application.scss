@@ -14,3 +14,17 @@
  *= require_self
  */
  @import "bootstrap";
+
+ .sign-up-card {
+  max-width: 600px;
+  background-color: lightgray;
+ }
+
+ .alert-container {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  flex-direction: column;
+  flex-basis: 1;
+  height: 90px;
+ }

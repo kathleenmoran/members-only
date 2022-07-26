@@ -22,7 +22,7 @@
             destroy_user_session_path,
             method: :delete,
             type: "button",
-            class: "d-flex btn btn-primary"
+            class: "d-flex btn btn-secondary"
           ) %>
         <% else %>
             <%= button_to(
@@ -33,12 +33,14 @@
         <% end %>
       </div>
     </nav>
+    <div class="alert-container">
+      <% if notice %>
+        <p class="alert alert-success m-2"><%= notice.capitalize %></p>
+      <% end %>
+      <% if alert %>
+        <p class="alert alert-danger m-2"><%= alert.capitalize %></p>
+      <% end %>
+    </div>
     <%= yield %>
-    <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
-    <% end %>
   </body>
 </html>
