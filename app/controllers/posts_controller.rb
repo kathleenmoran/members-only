@@ -11,9 +11,9 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(allowed_post_params)
-    @post.users_id = current_user.id
+    @post.user_id = current_user.id
     if @post.save
-      redirect_to new_post_path
+      redirect_to action: 'index'
     else
       render :new, status: :unprocessable_entity
     end
