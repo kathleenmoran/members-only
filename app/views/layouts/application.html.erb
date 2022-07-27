@@ -11,26 +11,35 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="/posts">
           <%= image_tag "incognito.svg", height: 40 %>
           MembersOnly
         </a>
 
-        <% if user_signed_in?%>
+        <div class="d-flex">
           <%= button_to(
-            "Log Out",
-            destroy_user_session_path,
-            method: :delete,
+            "+", new_post_path,
+            method: :get,
             type: "button",
-            class: "d-flex btn btn-secondary"
+            class: "btn btn-success fs-4 fw-bold new-btn mx-3"
           ) %>
-        <% else %>
+
+          <% if user_signed_in?%>
             <%= button_to(
-              "Log in", new_user_session_path,
+              "Log Out",
+              destroy_user_session_path,
+              method: :delete,
               type: "button",
-              class: "d-flex btn btn-secondary"
+              class: "btn btn-secondary"
             ) %>
-        <% end %>
+          <% else %>
+              <%= button_to(
+                "Log in", new_user_session_path,
+                type: "button",
+                class: "btn btn-secondary"
+              ) %>
+          <% end %>
+        </div>
       </div>
     </nav>
     <div class="alert-container">
@@ -40,8 +49,8 @@
       <% if alert %>
         <p class="alert alert-danger m-2"><%= alert.capitalize %></p>
       <% end %>
-      <% if devise_controller? && resource.errors.any? %>
-        <p class="alert alert-danger m-2"><%= resource.errors.full_messages.join(', ').capitalize %>.</p>
+      <% if (devise_controller? && resource.errors.any?) ||  (@post && @post.errors.any?) %>
+        <p class="alert alert-danger m-2"><%= (@post ? @post : resource).errors.full_messages.join(', ').capitalize %>.</p>
       <% end %>
     </div>
     <%= yield %>
