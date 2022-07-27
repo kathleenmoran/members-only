@@ -13,7 +13,7 @@ class PostsController < ApplicationController
     @post = Post.new(allowed_post_params)
     @post.user_id = current_user.id
     if @post.save
-      redirect_to action: 'index'
+      redirect_to new_post_path, notice: "Your post was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
