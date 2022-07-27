@@ -34,7 +34,8 @@
             ) %>
           <% else %>
               <%= button_to(
-                "Log in", new_user_session_path,
+                "Log In", new_user_session_path,
+                method: :get,
                 type: "button",
                 class: "btn btn-secondary"
               ) %>
