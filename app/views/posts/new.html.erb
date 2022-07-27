@@ -1,19 +1,17 @@
-<% if @post.errors.any? %>
-  <div id="error_explanation">
-    <h2><%= pluralize(@post.errors.count, "error") %> prohibited this user from being saved:</h2>
+<div class="card mx-auto sign-up-card p-3 my-2">
+  <%= form_with model: @post do |f| %>
 
-    <ul>
-      <% @post.errors.each do |error| %>
-        <li><%= error.full_message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+    <div class="mb-3 pb-3">
+      <%= f.label :title, hidden: true, class: "form-label" %>
+      <%= f.email_field :title, autofocus: true, autocomplete: "title", placeholder: "Title", class: "form-control" %>
+    </div>
 
-<%= form_with model: @post do |form| %>
-  <%= form.label :title %>
-  <%= form.text_field :title %>
-  <%= form.label :body %>
-  <%= form.text_area :body %>
-  <%= form.submit "Create Post" %>
-<% end %>
+    <div class="mb-3 pb-3">
+      <%= f.label :body, hidden: true, class: "form-label" %>
+      <%= f.text_area :body, autofocus: true, autocomplete: "body", placeholder: "What's on your mind?", class: "form-control" %>
+    </div>
+    <div class="actions d-grid gap-2 pb-3">
+      <%= f.submit "Create post", class: "btn btn-success" %>
+    </div>
+  <% end %>
+</div>
