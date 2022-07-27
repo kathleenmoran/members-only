@@ -1,8 +1,32 @@
-<h1>Posts</h1>
+<% unless user_signed_in?%>
+  <div class="card mx-auto sign-up-card p-3 my-2">
+    <div class="card-body">
+      <h5 class="card-title">Welcome to MembersOnly!</h5>
+      <p class="card-text">Here members share secret messages with each other. Sign up to find out who wrote these mysterious posts and create a post your own!</p>
+      <%= button_to(
+        "Sign Up", new_user_registration_path,
+        method: "get",
+        type: "button",
+        class: "btn btn-success"
+      ) %>
+    </div>
+  </div>
+<% end %>
 
-<ul>
-  <% @posts.each do |post| %>
-    <h2><%= post.title %></h2><br>
-    <p><%= post.body %></p><br>
-  <% end %>
-</ul>
+<% @posts.each do |post| %>
+  <div class="card mx-auto sign-up-card my-4">
+    <div class="card-body">
+      <h5 class="card-title"><%= post.title %></h5>
+      <p class="card-text"><%= post.body %></p>
+    </div>
+    <% if user_signed_in?%>
+      <div class="card-footer text-muted text-center" >
+        Posted by <%= post.user.username %>
+      </div>
+    <% else %>
+      <div class="card-footer text-muted text-center">
+        Posted by Secret Member
+      </div>
+    <% end %>
+  </div>
+<% end %>
