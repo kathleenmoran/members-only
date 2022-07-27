@@ -40,6 +40,9 @@
       <% if alert %>
         <p class="alert alert-danger m-2"><%= alert.capitalize %></p>
       <% end %>
+      <% if devise_controller? && resource.errors.any? %>
+        <p class="alert alert-danger m-2"><%= resource.errors.full_messages.join(', ').capitalize %>.</p>
+      <% end %>
     </div>
     <%= yield %>
   </body>
